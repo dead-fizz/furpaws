@@ -36,15 +36,15 @@ body {
 .header {
     background-color: var(--card-sub-bg); 
     border-radius: 20px;
-    padding: 4px 24px;
+    padding: 0 30 px;
     display: flex;
     align-items: center;
     justify-content: space-between; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     
     width: 100%; 
-    max-width: 1400px;
-    margin: 30px auto 0 auto; 
+    max-width: none;
+    margin: 20px auto;
 }
 
 .dashboard-container {
@@ -52,7 +52,7 @@ body {
     width: 100%;         
     max-width: none; 
     margin: 20px auto;  
-    padding: 0 20px;         
+    padding: 0 30px;         
 }
 
 .dashboard-container h2 {
