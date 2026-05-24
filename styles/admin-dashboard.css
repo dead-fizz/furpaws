@@ -1,15 +1,13 @@
 @font-face {
-    font-family: 'Kdam Thmor Pro'; 
-    src: url('../assets/fonts/Kdam Thmor Pro/KdamThmorPro-Regular.ttf') format('truetype'); 
-    font-weight: normal;
-    font-style: normal;
+      font-family: "Kdam Thmor Pro";
+      src: url("../assets/fonts/Kdam Thmor Pro/KdamThmorPro-Regular.ttf") format("truetype");
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Kdam Thmor Pro', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Kdam Thmor Pro", sans-serif;
 }
 
 :root {
@@ -23,10 +21,20 @@
     --accent-blue: #041324;
 }
 
-body {
+/*body {
     background-color: var(--bg-dark-blue);
     color: var(--white);
     padding: 24px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    min-height: 100vh;
+}*/
+
+body {
+    background-color: var(--bg-dark-blue);
+    color: var(--white);
+    padding: 20px 60px 60px 60px;
     display: flex;
     flex-direction: column; 
     align-items: center;
@@ -42,6 +50,25 @@ body {
     justify-content: space-between; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     width: 100%; 
+    max-width: 100%;
+    margin: 0 0 24px 0;
+    position: relative;
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.dashboard-container h2 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+    /*
     max-width: none;
     margin: 20px auto;
     position: relative;
@@ -54,12 +81,8 @@ body {
     margin: 20px auto;  
     padding: 0 40px;         
 }
+    */
 
-.dashboard-container h2 {
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-    margin-bottom: 24px;
-}
 
 .dashboard-container .dots {
     color: var(--text-bright-blue);
