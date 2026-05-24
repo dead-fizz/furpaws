@@ -51,7 +51,7 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     width: 100%; 
     max-width: 100%;
-    margin: 0 0 24px 0;
+    margin: 0 auto 24px autp;
     position: relative;
 }
 
@@ -90,7 +90,7 @@ body {
 
 .logo {
     width: 52px;
-      margin-left: 60px;
+      margin-left: 0;
 }
 
 .nav-bar {
