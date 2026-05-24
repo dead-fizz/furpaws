@@ -36,15 +36,15 @@ body {
 .header {
     background-color: #073965; 
     border-radius: 20px;
-    padding: 8px 40px;
+    padding: 12px 28px;
     display: flex;
     align-items: center;
     justify-content: space-between; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    
     width: 100%; 
     max-width: none;
     margin: 20px auto;
+    position: relative;
 }
 
 .dashboard-container {
