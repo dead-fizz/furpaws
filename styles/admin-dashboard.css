@@ -36,14 +36,14 @@ body {
 .header {
     background-color: #073965; 
     border-radius: 20px;
-    padding: 4px 40px;
+    padding: 0 40px;
     display: flex;
     align-items: center;
     justify-content: space-between; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     
     width: 100%; 
-    max-width: 100%;
+    max-width: none;
     margin: 20px auto;
 }
 
