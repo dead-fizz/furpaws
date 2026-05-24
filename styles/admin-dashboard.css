@@ -36,14 +36,14 @@ body {
 .header {
     background-color: var(--card-sub-bg); 
     border-radius: 20px;
-    padding: 4px 30px;
+    padding: 0 30px;
     display: flex;
     align-items: center;
     justify-content: space-between; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     
     width: 100%; 
-    max-width: none;
+    max-width: 100%;
     margin: 20px auto;
 }
 
@@ -151,7 +151,7 @@ body {
 }
 
 .card {
-    background-color: #7393b3;
+    background-color: var(--card-bg-blue);
     border-radius: 16px;
     padding: 24px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
@@ -159,7 +159,7 @@ body {
 
 .card h3 {
     color: var(--text-bright-blue);
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
     letter-spacing: 1px;
     margin-bottom: 20px;
@@ -187,21 +187,21 @@ body {
 }
 
 .small-card {
-    background-color: #C0CDD8;
+    background-color: var(--card-sub-bg);
     border-radius: 12px;
     padding: 16px;
     min-height: 140px;
 }
 
 .small-card h4 {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--text-bright-blue);
     margin-bottom: 12px;
     letter-spacing: 0.5px;
 }
 
 .sub-heading {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     color: #6482a6;
     display: block;
     font-weight: normal;
@@ -225,7 +225,7 @@ body {
     border: 1px solid #415d85;
     border-radius: 6px;
     padding: 6px 10px;
-    font-size: 0.75rem;
+    font-size: 0.80rem;
     color: var(--text-muted-blue);
     display: flex;
     justify-content: space-between;
@@ -248,7 +248,7 @@ body {
 
 .donut-chart-mock .pct {
     position: absolute;
-    font-size: 0.75rem;
+    font-size: 0.80rem;
     color: var(--white);
     font-weight: bold;
 }
@@ -278,7 +278,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.72rem;
+    font-size: 0.80rem;
     color: var(--text-muted-blue);
 }
 
@@ -350,7 +350,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     color: var(--text-bright-blue);
 }
 
@@ -408,7 +408,7 @@ body {
 }
 
 .see-more-btn {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     color: var(--text-muted-blue);
     text-decoration: none;
     border: 1px solid #415d85;
@@ -429,7 +429,7 @@ body {
 }
 
 .data-list li {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--text-muted-blue);
     background: rgba(17, 30, 46, 0.2);
     padding: 10px 14px;
@@ -487,7 +487,7 @@ body {
 .x-axis-scale {
     display: flex;
     justify-content: space-between;
-    font-size: 0.68rem;
+    font-size: 0.8rem;
     color: var(--text-muted-blue);
     padding-left: 175px; 
     margin-bottom: 8px;
@@ -509,7 +509,7 @@ body {
 
 .chart-row-group label {
     width: 165px;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: bold;
     color: var(--text-bright-blue);
     text-transform: uppercase;
@@ -536,7 +536,7 @@ body {
 }
 
 .chart-row-group .val {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: bold;
     color: var(--white);
     min-width: 30px;
@@ -610,7 +610,7 @@ body {
 
 .user-details h3 {
     color: var(--text-bright-blue);
-    font-size: 1.2rem;
+    font-size: 2rem;
     letter-spacing: 1px;
     margin-bottom: 18px;
     border-bottom: 1px solid rgba(112, 179, 255, 0.2);
@@ -624,13 +624,13 @@ body {
 
 .user-details h4 {
     color: var(--text-muted-blue);
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     letter-spacing: 0.5px;
     margin-bottom: 6px;
 }
 
 .user-details p {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--text-muted-blue);
     margin-bottom: 10px;
     display: flex;
@@ -657,7 +657,7 @@ body {
     background: rgba(17, 30, 46, 0.2);
     padding: 8px 12px;
     border-radius: 6px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--white);
 }
 
@@ -687,7 +687,7 @@ body {
     color: var(--white);
     padding: 10px 16px;
     border-radius: 8px;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     width: 260px;
     outline: none;
     transition: border-color 0.2s;
@@ -708,7 +708,7 @@ body {
     border: 1px solid #415d85;
     padding: 10px 16px;
     border-radius: 8px;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     cursor: pointer;
     font-weight: 600;
     display: flex;
@@ -738,7 +738,7 @@ body {
 .dropdown-item {
     color: var(--white);
     padding: 10px 14px;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     cursor: pointer;
 }
 
@@ -750,14 +750,14 @@ body {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
 }
 
 .user-table th {
     color: var(--text-dark-blue);
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     letter-spacing: 0.5px;
     padding: 12px 16px;
     border-bottom: 2px solid #415d85;
@@ -781,7 +781,7 @@ body {
     padding: 4px 10px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     transition: all 0.2s;
 }
 
@@ -826,7 +826,7 @@ body {
 
 .pet-details h3 {
     color: var(--text-bright-blue);
-    font-size: 1.2rem;
+    font-size: 2rem;
     letter-spacing: 1px;
     margin-bottom: 18px;
     border-bottom: 1px solid rgba(112, 179, 255, 0.2);
@@ -834,7 +834,7 @@ body {
 }
 
 .pet-details p {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--text-muted-blue);
     margin-bottom: 12px;
     display: flex;
@@ -860,14 +860,14 @@ body {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
 }
 
 .pet-table th {
     color: var(--text-dark-blue);
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     letter-spacing: 0.5px;
     padding: 12px 16px;
     border-bottom: 2px solid #415d85;
