@@ -84,17 +84,15 @@ body {
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    
-    /* FIX: Match width and center it */
     width: 100%;
-    max-width: 1600px; /* Set a specific max-width if you want a cap */
+    max-width: none; /* Set a specific max-width if you want a cap */
     margin-bottom: 24px;
 }
 
 .dashboard-container {
     /* FIX: Match header width and remove internal padding that causes offset */
     width: 100%;
-    max-width: 1600px; 
+    max-width: none; 
     margin: 0 auto;
 }
 
