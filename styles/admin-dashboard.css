@@ -34,9 +34,9 @@ body {
 }
 
 .header {
-    background-color: var(--card-sub-bg); 
+    background-color: #073965; 
     border-radius: 20px;
-    padding: 0 30px;
+    padding: 4px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between; 
