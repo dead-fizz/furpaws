@@ -50,9 +50,9 @@ body {
 .dashboard-container {
     box-sizing: border-box;
     width: 100%;         
-    max-width: 1400px; 
+    max-width: 1600px; 
     margin: 20px auto;  
-    padding: 0 200px;         
+    padding: 0 10px;         
 }
 
 .dashboard-container h2 {
