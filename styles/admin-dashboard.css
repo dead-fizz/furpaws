@@ -36,7 +36,7 @@ body {
 .header {
     background-color: #073965; 
     border-radius: 20px;
-    padding: 0 40px;
+    padding: 8px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between; 
