@@ -36,21 +36,23 @@ body {
 .header {
     background-color: var(--card-sub-bg); 
     border-radius: 20px;
-    padding: 8px;
+    padding: 8px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    margin: 30px 60px 0px 60px;
-    position: relative;
+    
+    width: 90%; 
+    max-width: 1400px;
+    margin: 30px auto 0 auto; 
 }
 
 .dashboard-container {
     box-sizing: border-box;
-    width: 100%;          
-    max-width: 1400px;   
-    margin: 0 auto;      
-    padding: 0 20px; 
+    width: 90%;         
+    max-width: 1400px; 
+    margin: 24px auto;  
+    padding: 0;         
 }
 
 .dashboard-container h2 {
@@ -889,21 +891,11 @@ body {
     }
 }
 
-/* PENDING APPROVALS PAGE LAYOUT */
+/* PENDING APPROVALS PAGE LAYOUT 
 
 @font-face {
     font-family: "Kdam Thmor Pro";
     src: url("../../assets/fonts/KdamThmorPro/KdamThmorPro-Regular.ttf") format("truetype");
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-    font-family: "Kdam Thmor Pro", sans-serif;
-    background: #0b1a2e;
-    color: #cfe6ff;
-    min-height: 100vh;
-    padding: 20px;
 }
 
 .navbar {
@@ -1108,3 +1100,5 @@ tr:hover td { background: #1a2e4a; }
 }
 
 .btn-reject:hover { background: #861f1f; }
+
+*/
