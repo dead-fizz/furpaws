@@ -938,7 +938,7 @@ body {
     }
 }
 
-/* PENDING APPROVALS PAGE LAYOUT 
+/* PENDING APPROVALS PAGE LAYOUT */
 
 @font-face {
     font-family: "Kdam Thmor Pro";
@@ -1147,5 +1147,3 @@ tr:hover td { background: #1a2e4a; }
 }
 
 .btn-reject:hover { background: #861f1f; }
-
-*/
