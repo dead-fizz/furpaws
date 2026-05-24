@@ -117,9 +117,9 @@ body {
 .admin-profile-wrapper {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     flex: 1; 
-    justify-content: space-between; 
+    justify-content: flex-end; 
 }
 
 .profile-icon-mock {
@@ -131,6 +131,7 @@ body {
     align-items: center;
     justify-content: center;
     border: 1px solid var(--text-bright-blue);
+    margin-right: 5px;
 }
 
 .admin-info {
