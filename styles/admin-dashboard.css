@@ -20,7 +20,7 @@
     --text-muted-blue: #EDEADE;
     --text-dark-blue: #000435;
     --white: #ffffff;
-    --accent-blue: #007bff;
+    --accent-blue: #041324;
 }
 
 body {
@@ -36,7 +36,7 @@ body {
 .header {
     background-color: #073965; 
     border-radius: 20px;
-    padding: 4px 30px;
+    padding: 4px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between; 
