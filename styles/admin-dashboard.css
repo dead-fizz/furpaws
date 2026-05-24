@@ -46,10 +46,9 @@ body {
 }
 
 .dashboard-container {
-    width: 100%;
-    max-width: 100%;
+    box-sizing: border-box; 
+    padding: 0 50px;    
     margin: 0 auto;
-    padding: 0 30 px;
 }
 
 .dashboard-container h2 {
