@@ -1,261 +1,271 @@
+// 🔐 AUTH CHECK
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
 if (!currentUser || currentUser.role !== "admin") {
-    window.location.href = "../../pages/user authorization/2_sign_in_admin_account.html";
+  window.location.href = "../../pages/user authorization/2_sign_in_admin_account.html";
 }
 
+// 📦 STORAGE HELPERS
 function getPets() {
-    return JSON.parse(localStorage.getItem("pets")) || [];
+  return JSON.parse(localStorage.getItem("pets")) || [];
 }
 
 function savePets(pets) {
-    localStorage.setItem("pets", JSON.stringify(pets));
+  localStorage.setItem("pets", JSON.stringify(pets));
 }
 
 function getUsers() {
-    return JSON.parse(localStorage.getItem("users")) || [];
+  return JSON.parse(localStorage.getItem("users")) || [];
 }
 
-const path = window.location.pathname;
+// ==========================
+// 📊 OVERVIEW DASHBOARD
+// ==========================
+function renderOverview() {
+  const pets = getPets();
 
-const overviewPage = path.includes("1_overview.html");
-const userPage = path.includes("2_user_management.html");
-const petPage = path.includes("3_pet_records.html");
+  let dogs = 0, cats = 0, others = 0;
+  let newReg = 0, renewal = 0, overdue = 0;
 
-if (overviewPage) {
-    const pets = getPets();
+  const today = new Date();
 
-    let dogs = 0, cats = 0, others = 0;
+  pets.forEach(pet => {
+    // species
+    if (pet.species === "Dog") dogs++;
+    else if (pet.species === "Cat") cats++;
+    else others++;
 
-    pets.forEach(p => {
-        const s = p.species.toLowerCase();
-        if (s.includes("dog")) dogs++;
-        else if (s.includes("cat")) cats++;
-        else others++;
-    });
+    // type
+    if (pet.registrationType === "New") newReg++;
+    if (pet.registrationType === "Renewal") renewal++;
 
-    document.getElementById("dog-count").textContent = dogs;
-    document.getElementById("cat-count").textContent = cats;
-    document.getElementById("others-count").textContent = others;
+    // overdue
+    const regDate = new Date(pet.dateRegistered);
+    const diff = (today - regDate) / (1000 * 60 * 60 * 24);
+    if (diff > 365) overdue++;
+  });
 
-  const pendingList = document.getElementById("pending-list");
-
-    const pendingPets = pets.filter(p => p.registrationStatus === "Pending");
-
-    pendingList.innerHTML = "";
-
-    pendingPets.slice(0, 5).forEach(p => {
-        const li = document.createElement("li");
-        li.textContent = `${p.name} (${p.species}) - ${p.registrationID}`;
-        pendingList.appendChild(li);
-    });
-
-  const overdueList = document.getElementById("overdue-list");
-
-    const now = new Date();
-
-    const overduePets = pets.filter(p => {
-        const regDate = new Date(p.registeredAt);
-        regDate.setFullYear(regDate.getFullYear() + 1);
-        return regDate < now;
-    });
-
-    overdueList.innerHTML = "";
-
-    overduePets.slice(0, 5).forEach(p => {
-        const li = document.createElement("li");
-        li.textContent = `${p.name} - OVERDUE`;
-        overdueList.appendChild(li);
-    });
+  // update UI safely
+  setText("dog-count", dogs);
+  setText("cat-count", cats);
+  setText("others-count", others);
+  setText("newreg-count", newReg);
+  setText("renewal-count", renewal);
+  setText("overdue-count", overdue);
 }
 
-if (userPage) {
-    const users = getUsers();
-    const pets = getPets();
+// ==========================
+// 📋 PENDING LIST (RIGHT PANEL)
+// ==========================
+function renderPending() {
+  const list = document.getElementById("pending-list");
+  if (!list) return;
 
-    const tbody = document.getElementById("userTableBody");
+  const pets = getPets().filter(p => p.registrationStatus === "Pending");
 
-    tbody.innerHTML = "";
+  list.innerHTML = "";
 
-    users.forEach(user => {
-        const userPets = pets.filter(p => p.ownerID === user.userID);
-
-        const tr = document.createElement("tr");
-
-        tr.innerHTML = `
-            <td>${user.lastName}, ${user.firstName}</td>
-            <td>${user.userID}</td>
-            <td>${user.email}</td>
-            <td>${user.contactNumber || ""}</td>
-            <td>${userPets.length}</td>
-            <td><button onclick="selectUser('${user.userID}')">View</button></td>
-        `;
-
-        tbody.appendChild(tr);
-    });
-
-    window.selectUser = function(userID) {
-        const user = users.find(u => u.userID === userID);
-        const userPets = pets.filter(p => p.ownerID === userID);
-
-        document.getElementById("userid").textContent = user.userID;
-        document.getElementById("useremail").textContent = user.email;
-        document.getElementById("usercontact").textContent = user.contactNumber;
-
-        const petList = document.getElementById("userpets");
-        petList.innerHTML = "";
-
-        userPets.forEach(p => {
-            const li = document.createElement("li");
-            li.textContent = `${p.name} (${p.registrationStatus})`;
-            petList.appendChild(li);
-        });
-
-        if (userPets[0]) {
-            document.getElementById("petregid").textContent = userPets[0].registrationID;
-            document.getElementById("petstatus").textContent = userPets[0].registrationStatus;
-        }
-    };
+  pets.slice(0, 5).forEach(p => {
+    const li = document.createElement("li");
+    li.textContent = `${p.petName} (${p.ownerName})`;
+    list.appendChild(li);
+  });
 }
 
-if (petPage) {
-    const pets = getPets();
+// ==========================
+// ⏰ OVERDUE LIST
+// ==========================
+function renderOverdue() {
+  const list = document.getElementById("overdue-list");
+  if (!list) return;
 
-    const tbody = document.getElementById("petTableBody");
+  const today = new Date();
 
-    tbody.innerHTML = "";
+  const pets = getPets().filter(p => {
+    const d = new Date(p.dateRegistered);
+    return (today - d) / (1000 * 60 * 60 * 24) > 365;
+  });
 
-    pets.forEach(p => {
-        const tr = document.createElement("tr");
+  list.innerHTML = "";
 
-        tr.innerHTML = `
-            <td>${p.ownerID}</td>
-            <td>${p.registrationID}</td>
-            <td>${p.name}</td>
-            <td>${p.species}</td>
-            <td>${p.registrationStatus}</td>
-            <td>
-                <button onclick="viewPet('${p.petID}')">View</button>
-                <button onclick="approvePet('${p.petID}')">Approve</button>
-                <button onclick="deletePet('${p.petID}')">Delete</button>
-            </td>
-        `;
-
-        tbody.appendChild(tr);
-    });
-
-    window.viewPet = function(petID) {
-        const pet = pets.find(p => p.petID === petID);
-
-        document.getElementById("petage").textContent = pet.age;
-        document.getElementById("petspecies").textContent = pet.species;
-        document.getElementById("petbreed").textContent = pet.breed;
-        document.getElementById("petbirthday").textContent = pet.birthday;
-
-        document.getElementById("petregid").textContent = pet.registrationID;
-        document.getElementById("petstatus").textContent = pet.registrationStatus;
-        document.getElementById("petnotes").textContent = pet.notes;
-
-        document.getElementById("petmedical").textContent = pet.vaccinated;
-        document.getElementById("petmore").textContent = pet.neutered;
-    };
-
-  window.approvePet = function(petID) {
-        const updated = pets.map(p => {
-            if (p.petID === petID) {
-                p.registrationStatus = "Approved";
-            }
-            return p;
-        });
-
-        savePets(updated);
-        alert("Pet approved!");
-        location.reload();
-    };
-
-    window.deletePet = function(petID) {
-        if (!confirm("Delete this pet?")) return;
-
-        const updated = pets.filter(p => p.petID !== petID);
-        savePets(updated);
-
-        alert("Pet deleted!");
-        location.reload();
-    };
+  pets.slice(0, 5).forEach(p => {
+    const li = document.createElement("li");
+    li.textContent = `${p.petName} (${p.ownerName})`;
+    list.appendChild(li);
+  });
 }
 
-const logoutBtn = document.querySelector(".logout-btn");
+// ==========================
+// 📄 PET RECORDS TABLE
+// ==========================
+function renderPetRecords() {
+  const tbody = document.getElementById("petTableBody");
+  if (!tbody) return;
 
-if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("currentUser");
-        window.location.href = "../../pages/user authorization/2_sign_in_admin_account.html";
-    });
-}
+  const pets = getPets();
+  tbody.innerHTML = "";
 
-/* PENDING APPROVAL JS */
-
-<script>
-  
-  function logout() {
-    window.location.href = "../index.html";
-  }
-  const data = {
-    "new-reg": [
-      { date: "MM-DD-YYYY", uid: "UID", name: "PET'S NAME", mf: "F", species: "CAT", breed: "PET'S BREED", birthday: "N/A", age: 1 },
-      { date: "MM-DD-YYYY", uid: "UID", name: "PET'S NAME", mf: "M", species: "DOG", breed: "PET'S BREED", birthday: "N/A", age: 2 },
-    ],
-    "for-renewal": [
-      { date: "MM-DD-YYYY", uid: "UID", name: "PET'S NAME", mf: "F", species: "CAT", breed: "PET'S BREED", birthday: "N/A", age: 1 },
-      { date: "MM-DD-YYYY", uid: "UID", name: "PET'S NAME", mf: "M", species: "DOG", breed: "PET'S BREED", birthday: "N/A", age: 2 },
-    ],
-    "pet-info": [
-      { date: "MM-DD-YYYY", uid: "UID", name: "PET'S NAME", mf: "F", species: "CAT", breed: "PET'S BREED", birthday: "N/A", age: 1 },
-      { date: "MM-DD-YYYY", uid: "UID", name: "PET'S NAME", mf: "M", species: "DOG", breed: "PET'S BREED", birthday: "N/A", age: 2 },
-    ]
-  };
-
-  function renderRows(tabId) {
-    const tbody = document.getElementById(tabId + "-body");
-    const rows = data[tabId];
-    tbody.innerHTML = rows.map((pet, index) => `
+  pets.forEach(p => {
+    tbody.innerHTML += `
       <tr>
-        <td>${pet.date}</td>
-        <td>${pet.uid}</td>
-        <td><span class="view-link">VIEW</span></td>
-        <td>${pet.name}</td>
-        <td>${pet.mf}</td>
-        <td>${pet.species}</td>
-        <td>${pet.breed}</td>
-        <td>${pet.birthday}</td>
-        <td>${pet.age}</td>
-        <td><span class="view-link">VIEW</span></td>
-        <td><span class="view-link">VIEW</span></td>
-        <td><button class="btn-reject" onclick="handleAction('${tabId}', ${index}, 'reject')">REJECT</button></td>
-        <td><button class="btn-approve" onclick="handleAction('${tabId}', ${index}, 'approve')">APPROVE</button></td>
+        <td>${p.ownerID}</td>
+        <td>${p.petID}</td>
+        <td>${p.petName}</td>
+        <td>${p.species}</td>
+        <td>${p.registrationStatus}</td>
+        <td>VIEW</td>
       </tr>
-    `).join("");
+    `;
+  });
+}
+
+// ==========================
+// 👥 USER MANAGEMENT
+// ==========================
+function renderUserTable() {
+  const tbody = document.getElementById("userTableBody");
+  if (!tbody) return;
+
+  const users = getUsers();
+  tbody.innerHTML = "";
+
+  users.forEach(u => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${u.userID}</td>
+        <td>${u.email}</td>
+        <td>${u.role || "user"}</td>
+      </tr>
+    `;
+  });
+}
+
+// ==========================
+// 📋 PENDING TABLE PAGE
+// ==========================
+function renderPendingTable() {
+  const tbody = document.getElementById("new-registration-tbody");
+  if (!tbody) return;
+
+  const pets = getPets().filter(p => p.registrationStatus === "Pending");
+
+  tbody.innerHTML = "";
+
+  pets.forEach(p => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${p.dateRegistered}</td>
+        <td>${p.ownerID}</td>
+        <td>${p.petName}</td>
+        <td>${p.gender}</td>
+        <td>${p.species}</td>
+        <td>${p.breed}</td>
+        <td>${p.birthday}</td>
+        <td>${p.age}</td>
+        <td>
+          <button class="approve-btn" data-id="${p.petID}">✔</button>
+          <button class="reject-btn" data-id="${p.petID}">✖</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+// ==========================
+// ✅ APPROVE / REJECT
+// ==========================
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("approve-btn")) {
+    updatePetStatus(e.target.dataset.id, "Approved");
   }
 
-  function handleAction(tabId, index, action) {
-    const pet = data[tabId][index];
-    if (action === "approve") {
-      alert(`Approved: ${pet.name} (${pet.species})`);
-    } else {
-      alert(`Rejected: ${pet.name} (${pet.species})`);
+  if (e.target.classList.contains("reject-btn")) {
+    updatePetStatus(e.target.dataset.id, "Rejected");
+  }
+});
+
+function updatePetStatus(id, status) {
+  let pets = getPets();
+
+  pets = pets.map(p => {
+    if (p.petID === id) {
+      p.registrationStatus = status;
     }
-    data[tabId].splice(index, 1);
-    renderRows(tabId);
-  }
-  
-  function switchTab(id, clickedTab) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    clickedTab.classList.add('active');
-  }
+    return p;
+  });
 
-  renderRows("new-reg");
-  renderRows("for-renewal");
-  renderRows("pet-info");
-</script>
+  savePets(pets);
+
+  renderPendingTable();
+  renderOverview();
+  renderPending();
+}
+
+// ==========================
+// 🔍 SEARCH (WORKS ON TABLES)
+// ==========================
+function setupSearch(inputId, tableId) {
+  const input = document.getElementById(inputId);
+  const table = document.getElementById(tableId);
+
+  if (!input || !table) return;
+
+  input.addEventListener("keyup", () => {
+    const val = input.value.toLowerCase();
+    const rows = table.getElementsByTagName("tr");
+
+    Array.from(rows).forEach(row => {
+      row.style.display = row.textContent.toLowerCase().includes(val)
+        ? ""
+        : "none";
+    });
+  });
+}
+
+// ==========================
+// 🔃 SIMPLE SORT
+// ==========================
+function sortTable(tableId, colIndex) {
+  const table = document.getElementById(tableId);
+  if (!table) return;
+
+  const rows = Array.from(table.rows).slice(1);
+
+  rows.sort((a, b) => {
+    return a.cells[colIndex].innerText.localeCompare(
+      b.cells[colIndex].innerText
+    );
+  });
+
+  rows.forEach(row => table.appendChild(row));
+}
+
+// ==========================
+// 🧠 HELPER
+// ==========================
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+// ==========================
+// 🚀 PAGE ROUTER (CLEAN)
+// ==========================
+const page = window.location.pathname;
+
+if (page.includes("1_overview.html")) {
+  renderOverview();
+  renderPending();
+  renderOverdue();
+}
+
+if (page.includes("2_user_management.html")) {
+  renderUserTable();
+}
+
+if (page.includes("3_pet_records.html")) {
+  renderPetRecords();
+}
+
+if (page.includes("pending")) {
+  renderPendingTable();
+}
