@@ -79,7 +79,8 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 th {
@@ -89,6 +90,8 @@ th {
   padding: 10px 12px;
   font-weight: 500;
   letter-spacing: 0.5px;
+  font-size: 16px;
+  min-height: 600px;
 }
 
 td {
