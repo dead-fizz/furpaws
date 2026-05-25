@@ -82,7 +82,7 @@ table {
 }
 
 th {
-  background-color: var(--card-sub-bg);
+  background-color: var(--card-bg-blue);
   color: #ffffff;
   text-align: left;
   padding: 10px 12px;
