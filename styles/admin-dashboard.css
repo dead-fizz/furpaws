@@ -44,8 +44,8 @@
   border: none;
   color: #a4c2db;
   padding: 8px 0;
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 800;
   cursor: pointer;
   letter-spacing: 0.5px;
   transition: color 0.2s ease;
@@ -78,15 +78,15 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 11px;
+  font-size: 18px;
 }
 
 th {
-  background-color: #2da1db; 
+  background-color: (var(--card-sub-bg);
   color: #ffffff;
   text-align: left;
   padding: 10px 12px;
-  font-weight: 600;
+  font-weight: 800;
   letter-spacing: 0.5px;
 }
 
