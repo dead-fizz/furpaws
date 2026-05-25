@@ -40,10 +40,10 @@
 }
 
 .tab-btn {
-  gap: 15px;
+  gap: 40px;
   background: none;
   border: none;
-  color: #a4c2db;
+  color: var(--text-muted-blue);
   padding: 8px 0;
   font-size: 16px;
   font-weight: 600;
